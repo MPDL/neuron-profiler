@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<!-- INTERFACE -->
+	<cc:interface componentType="plupload.FileUploadComponent">
+		<cc:attribute name="fileUploadEventListener" method-signature="void method(de.mpg.mpdl.services.neuronProfiler.components.plupload.FileUploadEvent)" required="true"/>
+		<cc:attribute name="onUploadCompleteAction" method-signature="java.lang.String method()"/>
+		<cc:attribute name="rerender" type="java.lang.String"/>
+		<cc:attribute name="execute" type="java.lang.String"/>
+		<cc:attribute name="pluploadFileNames"/>
+	</cc:interface>
+	
+	<!-- IMPLEMENTATION -->
+	<cc:implementation>
+		<!-- stylesheet -->
+	    <h:outputStylesheet library="components/upload/plupload/jquery.plupload.queue/css/" name="jquery.plupload.queue.css"  target="head"/>
+	    <h:outputStylesheet library="components/upload/plupload/jquery.plupload.queue/img" target="head"/>
+		
+		<!-- Load source versions of the plupload script files -->
+		<h:outputScript library="components/upload" name="plupload_custom.js" target="head"/>
+		<h:outputScript library="components/upload/plupload" name="plupload.full.min.js" target="head"/>
+		<h:outputScript library="components/upload/plupload/jquery.plupload.queue" name="jquery.plupload.queue.js" target="head"/>
+		<h:outputScript library="components/upload/plupload/i18n" name="#{internationalizationHelper.userLocaleString}.js" target="head" rendered="#{internationalizationHelper.userLocaleString != 'en'}"/>
+
+
+		<script type="text/javascript">
+			function getViewState() {
+				if($('input[name=javax\\.faces\\.ViewState]').first()) {
+					var viewStateValue = encodeURI($('input[name=javax\\.faces\\.ViewState]').first().val());
+					var regExp = new RegExp('\\+','g');
+					var encodedViewState = viewStateValue.replace(regExp, '\%2B');
+					return encodedViewState;
+				} else {
+					return '';
+				}
+			}
+			
+			$(function(e) {
+				//console.log("initUploader" + getViewState());
+				initUploader('#{cc.clientId}', 
+					'#{cc.attrs.rerender}',
+					getViewState(),
+					'#{session.id}',
+					'#{facesContext.externalContext.request.contextPath}#{facesContext.viewRoot.viewId}',
+					'#{facesContext.externalContext.request.contextPath}/resources/components/upload/plupload/plupload.flash.swf',
+					'#{facesContext.externalContext.request.contextPath}/resources/components/upload/plupload/plupload.silverlight.xap');
+			});
+		</script>
+		
+		<div id="#{cc.clientId}">
+			
+			<div id="pluploader" style="height:47em;">You browser doesn't support HTML5 or Flash. Please upgrade to a newer version or install Adobe Flash Player.</div>
+			<h:commandButton  id="hiddenUploadCompleteButton" styleClass="hiddenUploadCompleteButton" action="#{cc.attrs.onUploadCompleteAction}">
+				<p:ajax execute="#{cc.attrs.execute} uploadedFilesByPlupload"  render="#{cc.attrs.rerender} uploadedFilesByPlupload"/>
+			</h:commandButton>
+			
+			<h:inputText id="uploadedFilesByPlupload" styleClass="uploadedFilesByPlupload" value="#{cc.attrs.pluploadFileNames}"/>
+
+		</div>
+	</cc:implementation>
+</html>
