@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Implementation-Title: Neuron Profiler
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: services.mpdl.mpg.de
+Build-Jdk: 1.7.0_67
+Built-By: yu
+Created-By: Maven Integration for Eclipse
+

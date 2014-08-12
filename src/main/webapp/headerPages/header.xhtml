@@ -4,9 +4,23 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:pretty="http://ocpsoft.com/prettyfaces">
+	
+<style>
+	.title {
+		font-family: Verdana, Geneva, sans-serif;
+		color: #000000;
+		font-size: 28;
+		font-style: italic;
+		letter-spacing: 4px;
+		word-spacing: 10px;
+		line-height: 40px;
+	}
+</style>
 
 	<h:form>
+
 		<h:panelGroup layout="block" style="position:relative; float: right;">
+			<h:outputText class="title" value="Neuron Profiler" />
 			<h:selectOneMenu id="selLocale" value="#{internationalizationHelper.userLocaleString}" immediate="true" valueChangeListener="#{internationalizationHelper.changeLanguage}">				
 				<f:selectItem itemValue="de" itemLabel="#{lbl.ENUM_LANGUAGE_DE}" />
 				<f:selectItem itemValue="en" itemLabel="#{lbl.ENUM_LANGUAGE_EN}" />			
