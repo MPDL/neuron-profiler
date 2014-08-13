@@ -13,6 +13,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
@@ -37,9 +38,11 @@ public class FileUploadBean {
 	private static Logger logger = Logger.getLogger(FileUploadBean.class);
 	private String outputHTML;
 //	private File swcRespFile;
+	private boolean show3DView = false;
 	
 	@ManagedProperty("#{sessionBean}")
 	private SessionBean sb;
+	private int percent = 100;
 
 	public void handleFileUpload(FileUploadEvent event) {
 		UploadedFile f = event.getFile();
@@ -84,7 +87,7 @@ public class FileUploadBean {
 		}
 		uploadedFiles.add(uf);
 		try {
-			sb.setSwcRespFile(postFileGetRespFile(PropertyReader.getProperty("swcService.targetURL"), uf));
+			sb.setSwcRespFile(generate3DView(uf));
 			sb.setReaded(false);
 		
 //			setSwcRespFile(postFileGetRespFile(PropertyReader.getProperty("swcService.targetURL"), uf));
@@ -103,6 +106,7 @@ public class FileUploadBean {
 			if(sb != null && !sb.isReaded())
 			{
 				outputHTML = FileUtils.readFileToString(sb.getSwcRespFile());
+				this.show3DView = true;
 				sb.setReaded(true);
 			}
 		} catch (IOException e) {
@@ -116,8 +120,9 @@ public class FileUploadBean {
 	}
 
 
-	public File postFileGetRespFile(String targetURL, File f) throws HttpException,IOException {
-	    File respFile = File.createTempFile("swc_", ".html");
+	public File generate3DView(File f) throws HttpException,IOException, URISyntaxException {
+		String targetURL = PropertyReader.getProperty("swc.3Dview.targetURL");
+	    File respFile = File.createTempFile("swc_3d", ".html");
     	PostMethod filePost = new PostMethod(targetURL);
 		Part[] parts = { new FilePart(f.getName(), f) };
 		filePost.setRequestEntity(new MultipartRequestEntity(parts, filePost.getParams()));
@@ -129,6 +134,32 @@ public class FileUploadBean {
 		filePost.releaseConnection();
 		System.err.println(respFile);
 		return respFile;
+	}
+	
+	
+	public String generate()
+	{
+
+		return "";
+	}
+	
+	public String generateScreenshot() throws HttpException,IOException, URISyntaxException {
+		File f = uploadedFiles.get(0);
+		int p = getPercent();
+		
+		String targetURL = PropertyReader.getProperty("swc.screenshot.targetURL");
+	    File respFile = File.createTempFile("swc_ss", ".jpg");
+    	PostMethod filePost = new PostMethod(targetURL);
+		Part[] parts = { new FilePart(f.getName(), f) };
+		filePost.setRequestEntity(new MultipartRequestEntity(parts, filePost.getParams()));
+		HttpClient client = new HttpClient();
+		int status = client.executeMethod(filePost);
+		logger.debug("status : " + status);
+		String resp = filePost.getResponseBodyAsString();	
+	    Files.write(respFile.toPath(), resp.getBytes());
+		filePost.releaseConnection();
+		System.err.println("screenshot" + respFile);
+		return "";
 	}
 
 //	public File getSwcRespFile() {
@@ -150,6 +181,18 @@ public class FileUploadBean {
 	}
 	public void setSb(SessionBean sb) {
 		this.sb = sb;
+	}
+	public boolean isShow3DView() {
+		return show3DView;
+	}
+	public void setShow3DView(boolean show3dView) {
+		show3DView = show3dView;
+	}
+	public int getPercent() {
+		return percent;
+	}
+	public void setPercent(int percent) {
+		this.percent = percent;
 	}
 	
 	

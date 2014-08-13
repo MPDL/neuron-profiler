@@ -13,34 +13,42 @@
 	<ui:define name="center">
 	
 		<style type="text/css">
-			.ui-fileupload-content{
-			
+			.ui-fileupload-content{			
+			}
+			.center{
+				margin: 0 auto;
 			}
 			.uploadPanel, .output{
-				width:70%; 
+				
+				width:90%; 
 				background: white; 
 				border: none
 			}
 			.uploadPanel{
-				height:30%;
+				height:20%;
 			}
 			.output{
-				height: 70%
+				height: 80%;
+				
 			}
 
 		</style>
 		
-		<h:form>
-			<h:panelGroup layout="block" class="content">
-				<p:panel id="uploadPanel" class="uploadPanel">
-					<p:fileUpload fileUploadListener="#{fileUploadBean.handleFileUpload}" mode="advanced" dragDropSupport="true" oncomplete="javascript:window.location.reload()" fileLimit="1" auto="true" allowTypes="/(\.|\/)(swc)$/" >
+		<h:form>				
+				<p:panel id="uploadPanel" class="uploadPanel center">
+					<h:outputText value="#{lbl.select_file}" />
+					<p:fileUpload fileUploadListener="#{fileUploadBean.handleFileUpload}" mode="advanced" dragDropSupport="true" fileLimit="1" auto="true" allowTypes="/(\.|\/)(swc)$/" >
 					</p:fileUpload>
 				</p:panel>
 				
-				<p:panel  id="output" class="output">
-					<h:outputText  escape="false" value="#{fileUploadBean.outputHTML}"></h:outputText>		
+				<p:panel  id="output" class="output center" rendered="fileUploadBean.show3DView">
+					<h:outputText escape="false" value="#{fileUploadBean.outputHTML}"></h:outputText>
+					<h:inputText value="#{fileUploadBean.percent}"/>
+					<h:outputText value="%" />
+					<h:commandButton value="#{lbl.generate}" action="#{fileUplodBean.generateScreenshot()}"/>
+						
 				</p:panel>
-			</h:panelGroup>
+
 			
 			
 		</h:form>
