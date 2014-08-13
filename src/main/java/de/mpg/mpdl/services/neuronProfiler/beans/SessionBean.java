@@ -12,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 public class SessionBean implements Serializable{
 	private File swcFile; 
 	private File swcRespFile;
+	private String screenshotFile;
 	private boolean readed = true;
 	public File getSwcRespFile() {
 		return swcRespFile;
@@ -31,6 +32,13 @@ public class SessionBean implements Serializable{
 	public void setSwcFile(File swcFile) {
 		this.swcFile = swcFile;
 	}
+	public String getScreenshotFile() {
+		return screenshotFile;
+	}
+	public void setScreenshotFile(String screenshotFile) {
+		this.screenshotFile = screenshotFile;
+	}
+
 	
 	
 

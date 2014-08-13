@@ -153,7 +153,9 @@ public class FileUploadBean {
 		options.put("draggable", false);
 		options.put("resizable", false);
 		options.put("contentHeight", 800);
-
+		
+//		String f = "C:\\Users\\yu\\Desktop\\uploaded.png";
+//		sb.setScreenshotFile(f);
 		try {
 			generateScreenshot();
 		} catch (IOException | URISyntaxException e) {
@@ -181,6 +183,7 @@ public class FileUploadBean {
 		IOUtils.copy(post.getResponseBodyAsStream(), new FileOutputStream(screenshot));
 		post.releaseConnection();
 		System.err.println(screenshot);
+		sb.setScreenshotFile(screenshot.getAbsolutePath());
 		
 	}
 
