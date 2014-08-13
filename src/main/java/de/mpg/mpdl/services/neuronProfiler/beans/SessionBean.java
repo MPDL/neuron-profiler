@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class SessionBean implements Serializable{
+	private File swcFile; 
 	private File swcRespFile;
 	private boolean readed = true;
 	public File getSwcRespFile() {
@@ -24,6 +25,13 @@ public class SessionBean implements Serializable{
 	public void setReaded(boolean readed) {
 		this.readed = readed;
 	}
+	public File getSwcFile() {
+		return swcFile;
+	}
+	public void setSwcFile(File swcFile) {
+		this.swcFile = swcFile;
+	}
+	
 	
 
 }

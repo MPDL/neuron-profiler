@@ -18,8 +18,7 @@
 			.center{
 				margin: 0 auto;
 			}
-			.uploadPanel, .output{
-				
+			.uploadPanel, .output{			
 				width:90%; 
 				background: white; 
 				border: none
@@ -28,29 +27,38 @@
 				height:20%;
 			}
 			.output{
-				height: 80%;
-				
+				/*height: 80%;			*/	
 			}
 
 		</style>
 		
+		<script type="text/javascript">
+		function generate() {
+		   alert("test");
+		   return false;
+		}
+		</script>
+		
 		<h:form>				
-				<p:panel id="uploadPanel" class="uploadPanel center">
-					<h:outputText value="#{lbl.select_file}" />
-					<p:fileUpload fileUploadListener="#{fileUploadBean.handleFileUpload}" mode="advanced" dragDropSupport="true" fileLimit="1" auto="true" allowTypes="/(\.|\/)(swc)$/" >
-					</p:fileUpload>
-				</p:panel>
+			<p:panel id="uploadPanel" class="uploadPanel center">
+				<h:outputText value="#{lbl.select_file}" />
+				<p:fileUpload fileUploadListener="#{fileUploadBean.handleFileUpload}" mode="advanced" dragDropSupport="true" oncomplete="javascript:window.location.reload()" fileLimit="1" auto="true" allowTypes="/(\.|\/)(swc)$/" >
+				</p:fileUpload>
+			</p:panel>
 				
-				<p:panel  id="output" class="output center" rendered="fileUploadBean.show3DView">
-					<h:outputText escape="false" value="#{fileUploadBean.outputHTML}"></h:outputText>
-					<h:inputText value="#{fileUploadBean.percent}"/>
+			<p:panel  id="output" class="output center" >
+				<h:outputText escape="false" value="#{fileUploadBean.outputHTML}"></h:outputText>
+				<h:panelGroup layout="block">
+					<h:inputText value="#{fileUploadBean.percent}" />
 					<h:outputText value="%" />
-					<h:commandButton value="#{lbl.generate}" action="#{fileUplodBean.generateScreenshot()}"/>
-						
-				</p:panel>
+					<h:commandButton value="#{lbl.generate}" actionListener="#{fileUploadBean.generate}">
+						<p:ajax render=":#{component.parent.clientId}"/>
+					</h:commandButton>
+				</h:panelGroup>					
+			</p:panel>
+		</h:form>
+		<h:form id="form2">
 
-			
-			
 		</h:form>
 	</ui:define>
 </ui:composition>
