@@ -17,10 +17,14 @@ Installation guide:
 - **Install:**<br />
 1.clone neuron-profiler source code from [GitHub][2] <br />
 2.set Tomcat installation directory in your local settings.xml file:<br />
-			<tomcat.install.dir>TOMCAT_HOME</tomcat.install.dir> 
+```
+<tomcat.install.dir>TOMCAT_HOME</tomcat.install.dir>
+```
 3.(optional) set your own swc service in the neuron-profiler.properties file under "neuron-profiler/src/main/resources/":<br />
-	        swc.3Dview.targetURL = http://YOUR_SWC_SERVICE_DOMAIN/swc/api/view
-	        swc.screenshot.targetURL = http://YOUR_SWC_SERVICE_DOMAIN/swc/api/thumb
+```
+swc.3Dview.targetURL = http://YOUR_SWC_SERVICE_DOMAIN/swc/api/view
+swc.screenshot.targetURL = http://YOUR_SWC_SERVICE_DOMAIN/swc/api/thumb
+```
 
 - **Run:**<br />
 1.compile the .war and deploy it to the server with "mvn clean install"<br />
