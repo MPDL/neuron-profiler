@@ -27,10 +27,10 @@ Installation guide:
     ```
 
 #### **Run:**<br />
-1.compile the .war and deploy it to the server with "mvn clean install"<br />
-2.start your tomcat with running "TOMCAT_HOME/bin/startup.xx"<br />
-3.visit the webseit to goto "Http://server:port/neuron-profiler"<br />
-4.stop your tomcat with running 'TOMCAT_HOME/bin/shutdown.xx'<br />
+1. compile the .war and deploy it to the server with "mvn clean install"<br />
+2. start your tomcat with running "TOMCAT_HOME/bin/startup.xx"<br />
+3. visit the webseit to goto "Http://server:port/neuron-profiler"<br />
+4. stop your tomcat with running 'TOMCAT_HOME/bin/shutdown.xx'<br />
  
 [1]: https://github.com/MPDL/swc-service
 [2]: https://github.com/MPDL/neuron-profiler
