@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLConnection;
@@ -35,10 +36,11 @@ import de.mpg.mpdl.services.neuronProfiler.util.PropertyReader;
 
 @ManagedBean
 @ViewScoped
-public class FileUploadBean {
+public class FileUploadBean implements Serializable{
 
 	// private List<File> uploadedFiles = new ArrayList<File>();
 
+	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(FileUploadBean.class);
 	private String outputHTML;
 	// private File swcRespFile;

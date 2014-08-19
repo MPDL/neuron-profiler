@@ -74,6 +74,9 @@
 				-khtml-box-shadow: inset 0px 1px 0 #197A9D;
 				box-shadow: inset 0px 1px 0 #197A9D;
 			}
+			.ui-messages-error{
+			    backgound-color: yellow;
+			}
 
 		</style>
 		
@@ -87,7 +90,7 @@
 		<h:form>				
 			<p:panel id="uploadPanel" class="uploadPanel center">
 				<h:outputText value="#{lbl.select_file}" />
-				<p:fileUpload fileUploadListener="#{fileUploadBean.handleFileUpload}" mode="advanced" dragDropSupport="true" oncomplete="javascript:window.location.reload()" fileLimit="1" auto="true" allowTypes="/(\.|\/)(swc)$/" >
+				<p:fileUpload fileUploadListener="#{fileUploadBean.handleFileUpload}" mode="advanced" dragDropSupport="true" auto="true" oncomplete="javascript:window.location.reload()" fileLimit="1" allowTypes="/(\.|\/)(swc)$/" >
 				</p:fileUpload>
 			</p:panel>
 				

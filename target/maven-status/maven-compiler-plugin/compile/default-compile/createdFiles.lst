@@ -1,15 +1,7 @@
 de\mpg\mpdl\services\neuronProfiler\beans\SessionBean.class
-de\mpg\mpdl\services\neuronProfiler\view\PlUploadBean.class
-de\mpg\mpdl\services\neuronProfiler\components\plupload\FileUploadEvent.class
-de\mpg\mpdl\services\neuronProfiler\components\plupload\FileUploadComponent.class
 de\mpg\mpdl\services\neuronProfiler\util\MessageHelper.class
-de\mpg\mpdl\services\neuronProfiler\components\plupload\MultipartRequest.class
-de\mpg\mpdl\services\neuronProfiler\util\DateBean.class
-de\mpg\mpdl\services\neuronProfiler\util\PropertyReader.class
-de\mpg\mpdl\services\neuronProfiler\servlets\ImageServlet.class
-de\mpg\mpdl\services\neuronProfiler\components\plupload\MultipartMap.class
-de\mpg\mpdl\services\neuronProfiler\components\plupload\MultipartRequestFilter.class
 de\mpg\mpdl\services\neuronProfiler\beans\ApplicationBean.class
 de\mpg\mpdl\services\neuronProfiler\view\FileUploadBean.class
-de\mpg\mpdl\services\neuronProfiler\beans\ScreenshotBean.class
 de\mpg\mpdl\services\neuronProfiler\util\InternationalizationHelper.class
+de\mpg\mpdl\services\neuronProfiler\util\PropertyReader.class
+de\mpg\mpdl\services\neuronProfiler\servlets\ImageServlet.class
