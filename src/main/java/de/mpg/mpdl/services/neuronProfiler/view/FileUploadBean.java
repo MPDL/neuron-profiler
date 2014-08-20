@@ -10,7 +10,6 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -39,18 +38,18 @@ import de.mpg.mpdl.services.neuronProfiler.vo.SWCMetadata;
 
 @ManagedBean
 @SessionScoped
-public class FileUploadBean implements Serializable{
+public class FileUploadBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(FileUploadBean.class);
-	
+
 	private SWCItem item = new SWCItem();
-	
+
 	private String outputHTML;
 
 	private boolean show3DView = false;
 
 	private boolean readed = true;
-	
+
 	public void handleFileUpload(FileUploadEvent event) {
 		UploadedFile f = event.getFile();
 		InputStream in = null;
@@ -101,7 +100,8 @@ public class FileUploadBean implements Serializable{
 	public String getOutputHTML() {
 		try {
 			if (!isReaded()) {
-				outputHTML = FileUtils.readFileToString(this.item.getSwcRespHTMLFile());
+				outputHTML = FileUtils.readFileToString(this.item
+						.getSwcRespHTMLFile());
 				this.show3DView = true;
 				setReaded(true);
 			}
@@ -114,36 +114,87 @@ public class FileUploadBean implements Serializable{
 	public void setOutputHTML(String outputHTML) {
 		this.outputHTML = outputHTML;
 	}
-	
-	public void generateMD() throws HttpException, IOException,URISyntaxException, ParseException {
 
-//		File f = item.getSwcFile();
-		File f = new File("C:\\Users\\yu\\Desktop\\HB060602_3ptSoma.swc");
+	public void generateMD() throws HttpException, IOException,
+			URISyntaxException, ParseException {
 
-		String targetURL = PropertyReader.getProperty("swc.analyze.targetURL");
+		// File f = item.getSwcFile();
 
-		PostMethod post = new PostMethod(targetURL);
-
-		Part[] parts = { new FilePart(f.getName(), f) };
-		post.setRequestEntity(new MultipartRequestEntity(parts, post.getParams()));
-		HttpClient client = new HttpClient();
-		int status = client.executeMethod(post);
-		logger.debug("---generate Metadata --Status-- :" + status);
-		InputStream is = post.getResponseBodyAsStream();
+		 File f = new File("C:\\Users\\yao\\Desktop\\HB060602_3ptSoma.swc");
 		
-		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-		JSONParser jsonParser = new JSONParser();
-		JSONObject jsonObject = (JSONObject) jsonParser.parse(br);
-		Set<String> keys = jsonObject.keySet();
-		this.item.getMds().clear();
-		for(String key : keys){
-			this.item.getMds().add(new SWCMetadata(key,(String) jsonObject.get(key)));
-		}
+		 String targetURL =
+		 PropertyReader.getProperty("swc.analyze.targetURL");
+		
+		 PostMethod post = new PostMethod(targetURL);
+		
+		 Part[] parts = { new FilePart(f.getName(), f) };
+		 post.setRequestEntity(new MultipartRequestEntity(parts,
+		 post.getParams()));
+		 HttpClient client = new HttpClient();
+		 int status = client.executeMethod(post);
+		 logger.debug("---generate Metadata --Status-- :" + status);
+		 InputStream is = post.getResponseBodyAsStream();
+		
+		 BufferedReader br = new BufferedReader(new InputStreamReader(is,
+		 "UTF-8"));
+		 JSONParser jsonParser = new JSONParser();
+		 JSONObject jsonObject = (JSONObject) jsonParser.parse(br);
+		 Set<String> keys = jsonObject.keySet();
+		 this.item.getMds().clear();
+		 for(String key : keys){
+		 this.item.getMds().add(new SWCMetadata(key,(String)
+		 jsonObject.get(key)));
+		 }
+		
+		 post.releaseConnection();
 
-		post.releaseConnection();
-}
-	
-	
+//		File f = new File("C:\\Users\\yao\\Desktop\\HB060602_3ptSoma.swc");
+//
+//		String targetURL = PropertyReader.getProperty("swc.analyze.targetURL");
+//
+//		PostMethod post = new PostMethod(targetURL);
+//
+//		Part[] parts = { new FilePart(f.getName(), f) };
+//		post.setRequestEntity(new MultipartRequestEntity(parts, post
+//				.getParams()));
+//		HttpClient client = new HttpClient();
+//		int status = client.executeMethod(post);
+//		logger.debug("---generate Metadata --Status-- :" + status);
+//		InputStream is = post.getResponseBodyAsStream();
+//
+//		JSONParser jsonParser = new JSONParser();
+//		BufferedReader br = new BufferedReader(new InputStreamReader(is,
+//				"UTF-8"));
+//		ContainerFactory containerFactory = new ContainerFactory() {
+//			public List creatArrayContainer() {
+//				return new LinkedList();
+//			}
+//
+//			public Map createObjectContainer() {
+//				return new LinkedHashMap();
+//			}
+//
+//		};
+//
+//		try {
+//			Map json = (Map) jsonParser.parse(br, containerFactory);
+//			Iterator iter = json.entrySet().iterator();
+//			this.item.getMds().clear();
+//			while (iter.hasNext()) {
+//				Map.Entry entry = (Map.Entry) iter.next();
+//				this.item.getMds().add(
+//						new SWCMetadata((String) entry.getKey(), (String) entry
+//								.getValue()));
+//
+//			}
+//
+//		} catch (ParseException pe) {
+//			System.out.println(pe);
+//		}
+//
+//		post.releaseConnection();
+
+	}
 
 	public File generate3DView(File f) throws HttpException, IOException,
 			URISyntaxException {
@@ -156,9 +207,10 @@ public class FileUploadBean implements Serializable{
 		HttpClient client = new HttpClient();
 		int status = client.executeMethod(post);
 		logger.debug("status : " + status);
-		IOUtils.copy(post.getResponseBodyAsStream(), new FileOutputStream(respFile));
-//		String resp = filePost.getResponseBodyAsString();
-//		Files.write(respFile.toPath(), resp.getBytes());
+		IOUtils.copy(post.getResponseBodyAsStream(), new FileOutputStream(
+				respFile));
+		// String resp = filePost.getResponseBodyAsString();
+		// Files.write(respFile.toPath(), resp.getBytes());
 		post.releaseConnection();
 		System.err.println(respFile);
 		return respFile;
@@ -175,31 +227,33 @@ public class FileUploadBean implements Serializable{
 		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
-		RequestContext.getCurrentInstance().openDialog("screenshot", options, null);
+		RequestContext.getCurrentInstance().openDialog("screenshot", options,
+				null);
 	}
-	
 
 	public void generateScreenshot() throws HttpException, IOException,
 			URISyntaxException {
 		File f = item.getSwcFile();
 		File screenshot = File.createTempFile("swc_ss", ".png");
 
-		String targetURL = PropertyReader.getProperty("swc.screenshot.targetURL");
+		String targetURL = PropertyReader
+				.getProperty("swc.screenshot.targetURL");
 
 		PostMethod post = new PostMethod(targetURL);
 
 		Part[] parts = { new FilePart(f.getName(), f) };
-		post.setRequestEntity(new MultipartRequestEntity(parts, post.getParams()));
+		post.setRequestEntity(new MultipartRequestEntity(parts, post
+				.getParams()));
 		HttpClient client = new HttpClient();
 		int status = client.executeMethod(post);
 		logger.debug("status : " + status);
-		IOUtils.copy(post.getResponseBodyAsStream(), new FileOutputStream(screenshot));
+		IOUtils.copy(post.getResponseBodyAsStream(), new FileOutputStream(
+				screenshot));
 		post.releaseConnection();
 		System.err.println(screenshot);
 		this.item.setScreenshotFilePath(screenshot.getAbsolutePath());
-		
-	}
 
+	}
 
 	public boolean isShow3DView() {
 		return show3DView;
@@ -224,9 +278,5 @@ public class FileUploadBean implements Serializable{
 	public void setReaded(boolean readed) {
 		this.readed = readed;
 	}
-
-
-	
-	
 
 }
