@@ -117,8 +117,8 @@ public class FileUploadBean implements Serializable{
 	
 	public void generateMD() throws HttpException, IOException,URISyntaxException, ParseException {
 
-//		File f = item.getSwcFile();
-		File f = new File("C:\\Users\\yu\\Desktop\\HB060602_3ptSoma.swc");
+		File f = item.getSwcFile();
+	//	File f = new File("C:\\Users\\yu\\Desktop\\HB060602_3ptSoma.swc");
 
 		String targetURL = PropertyReader.getProperty("swc.analyze.targetURL");
 
