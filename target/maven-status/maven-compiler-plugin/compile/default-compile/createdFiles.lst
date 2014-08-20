@@ -1,5 +1,6 @@
 de\mpg\mpdl\services\neuronProfiler\beans\SessionBean.class
 de\mpg\mpdl\services\neuronProfiler\util\MessageHelper.class
+de\mpg\mpdl\services\neuronProfiler\util\ServiceHelper.class
 de\mpg\mpdl\services\neuronProfiler\vo\SWCMetadata.class
 de\mpg\mpdl\services\neuronProfiler\servlets\ImageServlet.class
 de\mpg\mpdl\services\neuronProfiler\util\PropertyReader.class
