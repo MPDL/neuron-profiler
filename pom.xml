@@ -221,7 +221,7 @@
 										<delete quiet="true" file="${tomcat.install.dir}/webapps/${project.warName}.war" />
 										<delete quiet="true" dir="${tomcat.install.dir}/webapps/${project.warName}" />
 										<!-- copy properties file to server -->
-										<copy overwrite="true" file="${project.build.directory}/classes/neuron-profiler.properties" todir="${tomcat.install.dir}/conf"></copy>
+										<copy overwrite="false" file="${project.build.directory}/classes/neuron-profiler.properties" todir="${tomcat.install.dir}/conf"></copy>
 										<!-- copy .war to server -->
 										<copy overwrite="true"  file="${project.build.directory}/${project.warName}.war" todir="${tomcat.install.dir}/webapps" />
 									</tasks>

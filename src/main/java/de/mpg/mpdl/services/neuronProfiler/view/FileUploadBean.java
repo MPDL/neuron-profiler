@@ -10,8 +10,11 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -25,7 +28,7 @@ import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.json.simple.JSONObject;
+import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.primefaces.context.RequestContext;
@@ -115,78 +118,50 @@ public class FileUploadBean implements Serializable {
 			URISyntaxException, ParseException {
 
 		 File f = item.getSwcFile();
-		
-		 String targetURL =
-		 PropertyReader.getProperty("swc.analyze.targetURL");
-		
-		 PostMethod post = new PostMethod(targetURL);
-		
-		 Part[] parts = { new FilePart(f.getName(), f) };
-		 post.setRequestEntity(new MultipartRequestEntity(parts,
-		 post.getParams()));
-		 HttpClient client = new HttpClient();
-		 int status = client.executeMethod(post);
-		 logger.debug("---generate Metadata --Status-- :" + status);
-		 InputStream is = post.getResponseBodyAsStream();
-		
-		 BufferedReader br = new BufferedReader(new InputStreamReader(is,
-		 "UTF-8"));
-		 JSONParser jsonParser = new JSONParser();
-		 JSONObject jsonObject = (JSONObject) jsonParser.parse(br);
-		 Set<String> keys = jsonObject.keySet();
-		 this.item.getMds().clear();
-		 for(String key : keys){
-		 this.item.getMds().add(new SWCMetadata(key,(String)
-		 jsonObject.get(key)));
-		 }
-		
-		 post.releaseConnection();
 
-//		File f = new File("C:\\Users\\yao\\Desktop\\HB060602_3ptSoma.swc");
-//
-//		String targetURL = PropertyReader.getProperty("swc.analyze.targetURL");
-//
-//		PostMethod post = new PostMethod(targetURL);
-//
-//		Part[] parts = { new FilePart(f.getName(), f) };
-//		post.setRequestEntity(new MultipartRequestEntity(parts, post
-//				.getParams()));
-//		HttpClient client = new HttpClient();
-//		int status = client.executeMethod(post);
-//		logger.debug("---generate Metadata --Status-- :" + status);
-//		InputStream is = post.getResponseBodyAsStream();
-//
-//		JSONParser jsonParser = new JSONParser();
-//		BufferedReader br = new BufferedReader(new InputStreamReader(is,
-//				"UTF-8"));
-//		ContainerFactory containerFactory = new ContainerFactory() {
-//			public List creatArrayContainer() {
-//				return new LinkedList();
-//			}
-//
-//			public Map createObjectContainer() {
-//				return new LinkedHashMap();
-//			}
-//
-//		};
-//
-//		try {
-//			Map json = (Map) jsonParser.parse(br, containerFactory);
-//			Iterator iter = json.entrySet().iterator();
-//			this.item.getMds().clear();
-//			while (iter.hasNext()) {
-//				Map.Entry entry = (Map.Entry) iter.next();
-//				this.item.getMds().add(
-//						new SWCMetadata((String) entry.getKey(), (String) entry
-//								.getValue()));
-//
-//			}
-//
-//		} catch (ParseException pe) {
-//			System.out.println(pe);
-//		}
-//
-//		post.releaseConnection();
+		String targetURL = PropertyReader.getProperty("swc.analyze.targetURL");
+
+		PostMethod post = new PostMethod(targetURL);
+
+		Part[] parts = { new FilePart(f.getName(), f) };
+		post.setRequestEntity(new MultipartRequestEntity(parts, post
+				.getParams()));
+		HttpClient client = new HttpClient();
+		int status = client.executeMethod(post);
+		logger.debug("---generate Metadata --Status-- :" + status);
+		InputStream is = post.getResponseBodyAsStream();
+
+		JSONParser jsonParser = new JSONParser();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is,
+				"UTF-8"));
+		ContainerFactory containerFactory = new ContainerFactory() {
+			public List creatArrayContainer() {
+				return new LinkedList();
+			}
+
+			public Map createObjectContainer() {
+				return new LinkedHashMap();
+			}
+
+		};
+
+		try {
+			Map json = (Map) jsonParser.parse(br, containerFactory);
+			Iterator iter = json.entrySet().iterator();
+			this.item.getMds().clear();
+			while (iter.hasNext()) {
+				Map.Entry entry = (Map.Entry) iter.next();
+				this.item.getMds().add(
+						new SWCMetadata((String) entry.getKey(), (String) entry
+								.getValue()));
+
+			}
+
+		} catch (ParseException pe) {
+			System.out.println(pe);
+		}
+
+		post.releaseConnection();
 
 	}
 
