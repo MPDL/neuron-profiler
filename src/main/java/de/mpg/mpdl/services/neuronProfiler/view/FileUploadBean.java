@@ -1,22 +1,21 @@
 package de.mpg.mpdl.services.neuronProfiler.view;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLConnection;
-import java.nio.file.Files;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
@@ -27,48 +26,39 @@ import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
-import de.mpg.mpdl.services.neuronProfiler.beans.SessionBean;
 import de.mpg.mpdl.services.neuronProfiler.util.PropertyReader;
+import de.mpg.mpdl.services.neuronProfiler.vo.SWCItem;
+import de.mpg.mpdl.services.neuronProfiler.vo.SWCMetadata;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class FileUploadBean implements Serializable{
-
-	// private List<File> uploadedFiles = new ArrayList<File>();
-
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(FileUploadBean.class);
+	
+	private SWCItem item = new SWCItem();
+	
 	private String outputHTML;
-	// private File swcRespFile;
+
 	private boolean show3DView = false;
 
-	@ManagedProperty("#{sessionBean}")
-	private SessionBean sb;
+	private boolean readed = true;
 	
-
-	
-	private int percent = 100;
-
 	public void handleFileUpload(FileUploadEvent event) {
 		UploadedFile f = event.getFile();
-		String fName = f.getFileName();
 		InputStream in = null;
 		File uf = null;
 		OutputStream out = null;
-		// String tmpDir = "";
 		try {
 			uf = File.createTempFile("swc_", ".swc");
-			// tmpDir = PropertyReader.getProperty("upload.tmpDir");
-			// File theDir = new File(tmpDir);
-			// if (!theDir.exists()) {
-			// theDir.mkdirs();
-			// }
 			in = f.getInputstream();
-			// uf = new File(tmpDir, fName);
 			out = new FileOutputStream(uf);
 			byte[] buffer = new byte[1024];
 			int bytesRead;
@@ -94,15 +84,10 @@ public class FileUploadBean implements Serializable{
 				}
 			}
 		}
-		// uploadedFiles.add(uf);
-		sb.setSwcFile(uf);
+		this.item.setSwcFile(uf);
 		try {
-			sb.setSwcRespFile(generate3DView(uf));
-			sb.setReaded(false);
-
-			// setSwcRespFile(postFileGetRespFile(PropertyReader.getProperty("swcService.targetURL"),
-			// uf));
-			// setOutputHTML(FileUtils.readFileToString(getSwcRespFile()));
+			this.item.setSwcRespHTMLFile(generate3DView(uf));
+			this.setReaded(false);
 		} catch (HttpException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -115,10 +100,10 @@ public class FileUploadBean implements Serializable{
 
 	public String getOutputHTML() {
 		try {
-			if (sb != null && !sb.isReaded()) {
-				outputHTML = FileUtils.readFileToString(sb.getSwcRespFile());
+			if (!isReaded()) {
+				outputHTML = FileUtils.readFileToString(this.item.getSwcRespHTMLFile());
 				this.show3DView = true;
-				sb.setReaded(true);
+				setReaded(true);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -129,6 +114,36 @@ public class FileUploadBean implements Serializable{
 	public void setOutputHTML(String outputHTML) {
 		this.outputHTML = outputHTML;
 	}
+	
+	public void generateMD() throws HttpException, IOException,URISyntaxException, ParseException {
+
+//		File f = item.getSwcFile();
+		File f = new File("C:\\Users\\yu\\Desktop\\HB060602_3ptSoma.swc");
+
+		String targetURL = PropertyReader.getProperty("swc.analyze.targetURL");
+
+		PostMethod post = new PostMethod(targetURL);
+
+		Part[] parts = { new FilePart(f.getName(), f) };
+		post.setRequestEntity(new MultipartRequestEntity(parts, post.getParams()));
+		HttpClient client = new HttpClient();
+		int status = client.executeMethod(post);
+		logger.debug("---generate Metadata --Status-- :" + status);
+		InputStream is = post.getResponseBodyAsStream();
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(br);
+		Set<String> keys = jsonObject.keySet();
+		this.item.getMds().clear();
+		for(String key : keys){
+			this.item.getMds().add(new SWCMetadata(key,(String) jsonObject.get(key)));
+		}
+
+		post.releaseConnection();
+}
+	
+	
 
 	public File generate3DView(File f) throws HttpException, IOException,
 			URISyntaxException {
@@ -155,22 +170,18 @@ public class FileUploadBean implements Serializable{
 		options.put("draggable", false);
 		options.put("resizable", false);
 		options.put("contentHeight", 800);
-		
-//		String f = "C:\\Users\\yu\\Desktop\\uploaded.png";
-//		sb.setScreenshotFile(f);
 		try {
 			generateScreenshot();
 		} catch (IOException | URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		RequestContext.getCurrentInstance().openDialog("screenshot", options, null);
 	}
+	
 
 	public void generateScreenshot() throws HttpException, IOException,
 			URISyntaxException {
-		File f = sb.getSwcFile();
-		int p = getPercent();
+		File f = item.getSwcFile();
 		File screenshot = File.createTempFile("swc_ss", ".png");
 
 		String targetURL = PropertyReader.getProperty("swc.screenshot.targetURL");
@@ -185,31 +196,10 @@ public class FileUploadBean implements Serializable{
 		IOUtils.copy(post.getResponseBodyAsStream(), new FileOutputStream(screenshot));
 		post.releaseConnection();
 		System.err.println(screenshot);
-		sb.setScreenshotFile(screenshot.getAbsolutePath());
+		this.item.setScreenshotFilePath(screenshot.getAbsolutePath());
 		
 	}
 
-	// public File getSwcRespFile() {
-	// return swcRespFile;
-	// }
-	// public void setSwcRespFile(File swcRespFile) {
-	// this.swcRespFile = swcRespFile;
-	// }
-	// public List<File> getUploadedFiles() {
-	// return uploadedFiles;
-	// }
-	//
-	// public void setUploadedFiles(List<File> uploadedFiles) {
-	// this.uploadedFiles = uploadedFiles;
-	// }
-
-	public SessionBean getSb() {
-		return sb;
-	}
-
-	public void setSb(SessionBean sb) {
-		this.sb = sb;
-	}
 
 	public boolean isShow3DView() {
 		return show3DView;
@@ -219,12 +209,24 @@ public class FileUploadBean implements Serializable{
 		show3DView = show3dView;
 	}
 
-	public int getPercent() {
-		return percent;
+	public SWCItem getItem() {
+		return item;
 	}
 
-	public void setPercent(int percent) {
-		this.percent = percent;
+	public void setItem(SWCItem item) {
+		this.item = item;
 	}
+
+	public boolean isReaded() {
+		return readed;
+	}
+
+	public void setReaded(boolean readed) {
+		this.readed = readed;
+	}
+
+
+	
+	
 
 }

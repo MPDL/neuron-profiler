@@ -27,7 +27,7 @@
 				height:25%;
 			}
 			.output{
-				height: 75%;			
+		
 			}
 			 .textbox { 
 			 	text-align: right;
@@ -79,32 +79,36 @@
 			}
 
 		</style>
-		
-		<script type="text/javascript">
-		function generate() {
-		   alert("test");
-		   return false;
-		}
-		</script>
-		
-		<h:form>				
+		<h:form id="uploadForm">				
 			<p:panel id="uploadPanel" class="uploadPanel center">
 				<h:outputText value="#{lbl.select_file}" />
-				<p:fileUpload fileUploadListener="#{fileUploadBean.handleFileUpload}" mode="advanced" dragDropSupport="true" auto="true" oncomplete="javascript:window.location.reload()" fileLimit="1" allowTypes="/(\.|\/)(swc)$/" >
+				<p:fileUpload fileUploadListener="#{fileUploadBean.handleFileUpload}" oncomplete="javascript:window.location.reload()"  mode="advanced" dragDropSupport="true" auto="true" fileLimit="1" allowTypes="/(\.|\/)(swc)$/" >
 				</p:fileUpload>
 			</p:panel>
-				
-			<p:panel  id="output" class="output center" >
+		</h:form>	
+		
+		<h:form id="outputForm">
+			<p:panel  id="output" class="output center" rendered="#{fileUploadBean.item.swcRespHTMLFile != null}">
 				<h:outputText escape="false" value="#{fileUploadBean.outputHTML}"></h:outputText>
-				<h:panelGroup layout="block" rendered="#{fileUploadBean.show3DView}">
-					<h:inputText value="#{fileUploadBean.percent}" class="textBox"/>
-					<h:outputText value="%" />
+				<h:panelGroup layout="block" >
 					<h:commandButton class="search-button ocean" value="#{lbl.generate_screenshot}" actionListener="#{fileUploadBean.generate}">
 						<p:ajax render=":#{component.parent.clientId}"/>
 					</h:commandButton>
 				</h:panelGroup>					
-			</p:panel>
-		</h:form>
+						
+				<p:commandButton class="search-button ocean" value="#{lbl.generate_md}" actionListener="#{fileUploadBean.generateMD}" update="md">	
+				</p:commandButton>				
+				<p:dataTable id="md" var="md" value="#{fileUploadBean.item.mds}">
+				    <p:column headerText="Key">
+				        <h:outputText value="#{md.key}" />
+				    </p:column>
+				 
+				    <p:column headerText="Value">
+				        <h:outputText value="#{md.value}" />
+				    </p:column>
+				</p:dataTable>
+			</p:panel>	
+		</h:form>	
 	</ui:define>
 </ui:composition>
 </html>
