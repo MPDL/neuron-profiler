@@ -48,8 +48,6 @@ public class FileUploadBean implements Serializable {
 
 	private boolean show3DView = false;
 
-	private boolean readed = true;
-
 	public void handleFileUpload(FileUploadEvent event) {
 		UploadedFile f = event.getFile();
 		InputStream in = null;
