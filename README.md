@@ -22,9 +22,9 @@ Installation guide:
     ```
 3. (optional) set your own swc service in the neuron-profiler.properties file under "neuron-profiler/src/main/resources/":
     ```
-    swc.3Dview.targetURL = http://YOUR_SWC_SERVICE_DOMAIN/swc/api/view
-    swc.analyze.targetURL = http://YOUR_SWC_SERVICE_DOMAIN/swc/api/analyze
-    swc.screenshot.targetURL = http://YOUR_SWC_SERVICE_DOMAIN/swc/api/thumb
+    swc.3Dview.targetURL=http://YOUR_SWC_SERVICE_DOMAIN/swc/api/view
+    swc.analyze.targetURL=http://YOUR_SWC_SERVICE_DOMAIN/swc/api/analyze
+    swc.screenshot.targetURL=http://YOUR_SWC_SERVICE_DOMAIN/swc/api/thumb
     ```
 
 #### **Run:**<br />
