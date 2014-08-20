@@ -1,9 +1,0 @@
-de\mpg\mpdl\services\neuronProfiler\beans\SessionBean.class
-de\mpg\mpdl\services\neuronProfiler\util\MessageHelper.class
-de\mpg\mpdl\services\neuronProfiler\vo\SWCMetadata.class
-de\mpg\mpdl\services\neuronProfiler\servlets\ImageServlet.class
-de\mpg\mpdl\services\neuronProfiler\util\PropertyReader.class
-de\mpg\mpdl\services\neuronProfiler\beans\ApplicationBean.class
-de\mpg\mpdl\services\neuronProfiler\vo\SWCItem.class
-de\mpg\mpdl\services\neuronProfiler\view\FileUploadBean.class
-de\mpg\mpdl\services\neuronProfiler\util\InternationalizationHelper.class
