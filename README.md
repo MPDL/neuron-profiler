@@ -2,7 +2,7 @@ neuron-profiler
 ===============
 
 
-"neuron-profiler" is the User Interface which is used to upload a swc file and show the generated 3D-View(and screenshot) in the browser.
+"neuron-profiler" is the User Interface which is used to upload a swc file, show the generated 3D-View and metadata in the browser.
 It's the presentation layer of the [swc-service][1]
 
 ----------
@@ -22,8 +22,9 @@ Installation guide:
     ```
 3. (optional) set your own swc service in the neuron-profiler.properties file under "neuron-profiler/src/main/resources/":
     ```
-    swc.3Dview.targetURL = http://YOUR_SWC_SERVICE_DOMAIN/swc/api/view
-    swc.screenshot.targetURL = http://YOUR_SWC_SERVICE_DOMAIN/swc/api/thumb
+    swc.3Dview.targetURL=http://YOUR_SWC_SERVICE_DOMAIN/swc/api/view
+    swc.analyze.targetURL=http://YOUR_SWC_SERVICE_DOMAIN/swc/api/analyze
+    swc.screenshot.targetURL=http://YOUR_SWC_SERVICE_DOMAIN/swc/api/thumb
     ```
 
 #### **Run:**<br />

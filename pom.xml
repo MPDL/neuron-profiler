@@ -7,6 +7,27 @@
 	<packaging>war</packaging>
 	<name>Neuron Profiler</name>
 
+	<description>Web application to upload swc filea</description>
+	<url>https://github.com/MPDL/neuron-profiler</url>
+	<licenses>
+		<license>
+			<name>Apache License</name>
+			<url>https://raw.githubusercontent.com/MPDL/neuron-profiler/master/LICENSE</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/MPDL/neuron-profiler</url>
+		<connection>scm:git:git://github.com/MPDL/neuron-profiler.git</connection>
+		<developerConnection>scm:git:git@github.com:MPDL/neuron-profiler.git</developerConnection>
+		<tag>master</tag>
+	</scm>
+	<issueManagement>
+		<system>Github</system>
+		<url>https://github.com/MPDL/neuron-profiler/issues</url>
+	</issueManagement>
+
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.warName>neuron-profiler</project.warName>
@@ -176,37 +197,24 @@
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.zeroturnaround</groupId>
-						<artifactId>javarebel-maven-plugin</artifactId>
-						<configuration>
-							<packaging>war</packaging>
-							<classpath>
-								<fallback>default</fallback>
-								<resources>
-									<resource>
-										<directory>target/classes</directory>
-										<excludes>
-											<exclude>log4j.xml</exclude>
-										</excludes>
-									</resource>
-								</resources>
-							</classpath>
-						</configuration>
-						<dependencies>
-							<dependency>
-								<groupId>org.codehaus.plexus</groupId>
-								<artifactId>plexus-utils</artifactId>
-								<version>1.4.1</version>
-								<scope>runtime</scope>
-							</dependency>
-						</dependencies>
-					</plugin>
+					  <groupId>org.zeroturnaround</groupId>
+					  <artifactId>jrebel-maven-plugin</artifactId>
+					  <executions>
+					    <execution>
+					      <id>generate-rebel-xml</id>
+					      <phase>process-resources</phase>
+					      <goals>
+					        <goal>generate</goal>
+					      </goals>
+					    </execution>
+					  </executions>
+					</plugin>				
 					<plugin>
 						<artifactId>maven-antrun-plugin</artifactId>
 						<executions>
 							<!-- copy the war folder into the tomcat deploy folder ($TOMCAT_HOME/webapps) -->
 							<execution>
-								<id>install</id>
+								<id>copy-to-tomcat</id>
 								<phase>install</phase>
 								<configuration>
 									<tasks>
@@ -224,57 +232,9 @@
 							</execution>
 						</executions>
 					</plugin>
-					<plugin>
-						<groupId>org.zeroturnaround</groupId>
-						<artifactId>jrebel-maven-plugin</artifactId>
-						<version>1.1.5</version>
-						<executions>
-							<execution>
-								<id>generate-rebel-xml</id>
-								<phase>process-resources</phase>
-								<goals>
-									<goal>generate</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
 
 				</plugins>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.eclipse.m2e</groupId>
-							<artifactId>lifecycle-mapping</artifactId>
-							<version>1.0.0</version>
-							<configuration>
-								<lifecycleMappingMetadata>
-									<pluginExecutions>
-										<pluginExecution>
-											<pluginExecutionFilter>
-												<groupId>org.zeroturnaround</groupId>
-												<artifactId>jrebel-maven-plugin</artifactId>
-												<versionRange>1.1</versionRange>
-												<goals>
-													<goal>generate</goal>
-												</goals>
-											</pluginExecutionFilter>
-											<action>
-												<execute />
-											</action>
-										</pluginExecution>
-									</pluginExecutions>
-								</lifecycleMappingMetadata>
-							</configuration>
-						</plugin>
-					</plugins>
-				</pluginManagement>
 			</build>
 		</profile>
 	</profiles>
-
-
-
-
-
-
 </project>

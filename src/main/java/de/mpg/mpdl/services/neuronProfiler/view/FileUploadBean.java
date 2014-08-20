@@ -53,6 +53,7 @@ public class FileUploadBean implements Serializable {
 	public void handleFileUpload(FileUploadEvent event) {
 		UploadedFile f = event.getFile();
 		InputStream in = null;
+
 		File uf = null;
 		OutputStream out = null;
 		try {
@@ -86,7 +87,7 @@ public class FileUploadBean implements Serializable {
 		this.item.setSwcFile(uf);
 		try {
 			this.item.setSwcRespHTMLFile(generate3DView(uf));
-			this.setReaded(false);
+			setShow3DView(true);
 		} catch (HttpException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -99,12 +100,9 @@ public class FileUploadBean implements Serializable {
 
 	public String getOutputHTML() {
 		try {
-			if (!isReaded()) {
-				outputHTML = FileUtils.readFileToString(this.item
-						.getSwcRespHTMLFile());
-				this.show3DView = true;
-				setReaded(true);
-			}
+		
+			outputHTML = FileUtils.readFileToString(this.item
+					.getSwcRespHTMLFile());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -118,9 +116,7 @@ public class FileUploadBean implements Serializable {
 	public void generateMD() throws HttpException, IOException,
 			URISyntaxException, ParseException {
 
-		// File f = item.getSwcFile();
-
-		 File f = new File("C:\\Users\\yao\\Desktop\\HB060602_3ptSoma.swc");
+		 File f = item.getSwcFile();
 		
 		 String targetURL =
 		 PropertyReader.getProperty("swc.analyze.targetURL");
@@ -255,14 +251,6 @@ public class FileUploadBean implements Serializable {
 
 	}
 
-	public boolean isShow3DView() {
-		return show3DView;
-	}
-
-	public void setShow3DView(boolean show3dView) {
-		show3DView = show3dView;
-	}
-
 	public SWCItem getItem() {
 		return item;
 	}
@@ -271,12 +259,12 @@ public class FileUploadBean implements Serializable {
 		this.item = item;
 	}
 
-	public boolean isReaded() {
-		return readed;
+	public boolean isShow3DView() {
+		return show3DView;
 	}
 
-	public void setReaded(boolean readed) {
-		this.readed = readed;
+	public void setShow3DView(boolean show3dView) {
+		show3DView = show3dView;
 	}
 
 }
