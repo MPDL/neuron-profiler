@@ -27,13 +27,29 @@
 				.ui-layout-unit-header{
 					font-family: Verdana, 'Lucida Sans Unicode', sans-serif;
 					font-size: 70%;
-					background: #51BEDB;
+					background: green;
 					border:none;
 					height: 15px;
 				}
 
 				.top{
-				background: #51BEDB;
+					background: green;
+					float:left;
+				}
+				.ui-layout-unit-content{
+					background-color: green !important;
+				}
+				.title {
+					font-family: Verdana, Geneva, sans-serif;
+					color: #000000;
+					font-size: 28;
+					font-style: italic;
+					letter-spacing: 4px;
+					word-spacing: 10px;
+					line-height: 40px;
+					padding: 10px; 
+					float:left;
+					
 				}
 			</style>
 			
@@ -43,25 +59,18 @@
 			
 			<p:layout fullPage="true">
 		
-				<p:layoutUnit id="top" class="top" header="" position="north" size="100" resizable="true" closable="true" collapsible="true" style="border:none;">
+				<p:layoutUnit id="top" class="top" position="north">
 					<ui:include src="../headerPages/header.xhtml" />
 				</p:layoutUnit>
 				
-				<p:layoutUnit id="bottom" position="south" size="50" resizable="true" style="border:none">
+				<p:layoutUnit id="bottom" position="south">
 					<h:outputLink value="link to license">...license...</h:outputLink>
 				</p:layoutUnit>
-						
-				<p:layoutUnit id="menu" header="menu" position="west" size="200" esizable="true" closable="true" collapsible="true"  style="border:none">
-					<ui:insert name="west"></ui:insert>
-				</p:layoutUnit>
-
 		
-				<p:layoutUnit position="center"  style="border:none">
-		        	<ui:insert name="center"></ui:insert>
+				<p:layoutUnit position="center">
+		        	<ui:insert name="center"/>
 		    	</p:layoutUnit>
 		    	
-
-		
 			</p:layout>
 		
 		</h:body>
