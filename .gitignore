@@ -2,6 +2,8 @@
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+.settings/
+.metadata/
 
 # Package Files #
 *.jar
@@ -9,8 +11,7 @@
 *.ear
 *.settings
 target/
-.settings/
-.metadata/
+
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -18,7 +19,4 @@ hs_err_pid*
 .classpath
 src/main/java/rebel.xml
 src/main/resources/rebel.xml
-.settings/org.eclipse.core.resources.prefs
-.settings/org.eclipse.wst.common.project.facet.core.xml
-.settings/org.eclipse.wst.common.project.facet.core.prefs.xml
-*.prefs
+
