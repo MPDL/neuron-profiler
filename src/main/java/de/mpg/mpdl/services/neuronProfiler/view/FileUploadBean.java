@@ -102,8 +102,7 @@ public class FileUploadBean implements Serializable {
 	public String getOutputHTML() {
 		try {
 		
-			outputHTML = FileUtils.readFileToString(this.item
-					.getSwcRespHTMLFile());
+			outputHTML = FileUtils.readFileToString(this.item.getSwcRespHTMLFile());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -117,23 +116,21 @@ public class FileUploadBean implements Serializable {
 	public void generateMD() throws HttpException, IOException,
 			URISyntaxException, ParseException {
 
-		 File f = item.getSwcFile();
+		File f = item.getSwcFile();
 
 		String targetURL = PropertyReader.getProperty("swc.analyze.targetURL");
 
 		PostMethod post = new PostMethod(targetURL);
 
 		Part[] parts = { new FilePart(f.getName(), f) };
-		post.setRequestEntity(new MultipartRequestEntity(parts, post
-				.getParams()));
+		post.setRequestEntity(new MultipartRequestEntity(parts, post.getParams()));
 		HttpClient client = new HttpClient();
 		int status = client.executeMethod(post);
 		logger.debug("---generate Metadata --Status-- :" + status);
 		InputStream is = post.getResponseBodyAsStream();
 
 		JSONParser jsonParser = new JSONParser();
-		BufferedReader br = new BufferedReader(new InputStreamReader(is,
-				"UTF-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 		ContainerFactory containerFactory = new ContainerFactory() {
 			public List creatArrayContainer() {
 				return new LinkedList();
@@ -151,9 +148,7 @@ public class FileUploadBean implements Serializable {
 			this.item.getMds().clear();
 			while (iter.hasNext()) {
 				Map.Entry entry = (Map.Entry) iter.next();
-				this.item.getMds().add(
-						new SWCMetadata((String) entry.getKey(), (String) entry
-								.getValue()));
+				this.item.getMds().add(new SWCMetadata((String) entry.getKey(), (String) entry.getValue()));
 
 			}
 
@@ -171,8 +166,7 @@ public class FileUploadBean implements Serializable {
 		File respFile = File.createTempFile("swc_3d", ".html");
 		PostMethod post = new PostMethod(targetURL);
 		Part[] parts = { new FilePart(f.getName(), f) };
-		post.setRequestEntity(new MultipartRequestEntity(parts, post
-				.getParams()));
+		post.setRequestEntity(new MultipartRequestEntity(parts, post.getParams()));
 		HttpClient client = new HttpClient();
 		int status = client.executeMethod(post);
 		logger.debug("status : " + status);
@@ -205,19 +199,16 @@ public class FileUploadBean implements Serializable {
 		File f = item.getSwcFile();
 		File screenshot = File.createTempFile("swc_ss", ".png");
 
-		String targetURL = PropertyReader
-				.getProperty("swc.screenshot.targetURL");
+		String targetURL = PropertyReader.getProperty("swc.screenshot.targetURL");
 
 		PostMethod post = new PostMethod(targetURL);
 
 		Part[] parts = { new FilePart(f.getName(), f) };
-		post.setRequestEntity(new MultipartRequestEntity(parts, post
-				.getParams()));
+		post.setRequestEntity(new MultipartRequestEntity(parts, post.getParams()));
 		HttpClient client = new HttpClient();
 		int status = client.executeMethod(post);
 		logger.debug("status : " + status);
-		IOUtils.copy(post.getResponseBodyAsStream(), new FileOutputStream(
-				screenshot));
+		IOUtils.copy(post.getResponseBodyAsStream(), new FileOutputStream(screenshot));
 		post.releaseConnection();
 		System.err.println(screenshot);
 		this.item.setScreenshotFilePath(screenshot.getAbsolutePath());

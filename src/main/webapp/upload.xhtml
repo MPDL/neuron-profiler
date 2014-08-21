@@ -13,91 +13,87 @@
 	<ui:define name="center">
 
 		<style type="text/css">
-.ui-fileupload-content {
-	
-}
-
-.center {
-	margin: 0 auto;
-}
-
-.uploadPanel,.output {
-	width: 90%;
-	background: white;
-	border: none
-}
-
-.uploadPanel {
-	height: 25%;
-}
-
-.output {
-	
-}
-
-.textbox {
-	text-align: right;
-	background: white;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	border: 1px solid #51BEDB;
-	border-radius: 5px;
-	box-shadow: 0 0 5px 3px #51BEDB;
-	color: #666;
-	outline: none;
-	height: 1.5em;
-	width: 5em;
-}
-
-input.search-button {
-	width: 170px;
-	height: 35px;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 14px;
-	text-align: center;
-	line-height: 34px;
-	text-decoration: none;
-	-webkit-border-radius: 50px;
-	-moz-border-radius: 50px;
-	-o-border-radius: 50px;
-	-khtml-border-radius: 50px;
-	border-radius: 50px;
-	font-weight: bold;
-	border: none;
-	cursor: pointer;
-}
-
-input.ocean {
-	background: #4AD4EE;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4AD4EE',
-		endColorstr='#278FAC');
-	background: -webkit-gradient(linear, left top, left bottom, from(#4AD4EE),
-		to(#278FAC));
-	background: -moz-linear-gradient(top, #4AD4EE, #278FAC);
-	color: #125267;
-	text-shadow: 0px 1px 0px #60ACC1;
-	-webkit-box-shadow: inset 0px 1px 0 #197A9D;
-	-moz-box-shadow: inset 0px 1px 0 #197A9D;
-	-o-box-shadow: inset 0px 1px 0 #197A9D;
-	-khtml-box-shadow: inset 0px 1px 0 #197A9D;
-	box-shadow: inset 0px 1px 0 #197A9D;
-}
-
-.ui-messages-error {
-	backgound-color: yellow;
-}
-</style>
+			.ui-fileupload-content {
+				
+			}
+			
+			.center {
+				margin: 0 auto;
+			}
+			
+			.uploadPanel,.output {
+				width: 90%;
+				background: white;
+				border: none
+			}
+			
+			.uploadPanel {
+				height: 25%;
+			}
+			
+			.output {
+				
+			}
+			
+			.textbox {
+				text-align: right;
+				background: white;
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				border-radius: 5px;
+				border: 1px solid #51BEDB;
+				border-radius: 5px;
+				box-shadow: 0 0 5px 3px #51BEDB;
+				color: #666;
+				outline: none;
+				height: 1.5em;
+				width: 5em;
+			}
+			
+			input.search-button {
+				width: 170px;
+				height: 35px;
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				text-align: center;
+				line-height: 34px;
+				text-decoration: none;
+				-webkit-border-radius: 50px;
+				-moz-border-radius: 50px;
+				-o-border-radius: 50px;
+				-khtml-border-radius: 50px;
+				border-radius: 50px;
+				font-weight: bold;
+				border: none;
+				cursor: pointer;
+			}
+			
+			input.ocean {
+				background: #4AD4EE;
+				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4AD4EE',
+					endColorstr='#278FAC');
+				background: -webkit-gradient(linear, left top, left bottom, from(#4AD4EE),
+					to(#278FAC));
+				background: -moz-linear-gradient(top, #4AD4EE, #278FAC);
+				color: #125267;
+				text-shadow: 0px 1px 0px #60ACC1;
+				-webkit-box-shadow: inset 0px 1px 0 #197A9D;
+				-moz-box-shadow: inset 0px 1px 0 #197A9D;
+				-o-box-shadow: inset 0px 1px 0 #197A9D;
+				-khtml-box-shadow: inset 0px 1px 0 #197A9D;
+				box-shadow: inset 0px 1px 0 #197A9D;
+			}
+			
+			.ui-messages-error {
+				backgound-color: yellow;
+			}
+		</style>
 
 
 		<h:form id="uploadForm">
 			<p:panel id="uploadPanel" class="uploadPanel center">
 				<h:outputText value="#{lbl.select_file}" />
-				<p:fileUpload
-					fileUploadListener="#{fileUploadBean.handleFileUpload}"
-					update="@this :outputForm:output" mode="advanced"
-					dragDropSupport="true" auto="true" fileLimit="1"
-					allowTypes="/(\.|\/)(swc)$/" oncomplete="afterUpload();">
+				<p:fileUpload fileUploadListener="#{fileUploadBean.handleFileUpload}" update="@this :outputForm:output" mode="advanced" dragDropSupport="true" auto="true" fileLimit="1" allowTypes="/(\.|\/)(swc)$/" oncomplete="afterUpload();">
 				</p:fileUpload>
 			</p:panel>
 		</h:form>
@@ -110,9 +106,7 @@ input.ocean {
 						<h:outputText escape="false" value="#{fileUploadBean.outputHTML}"></h:outputText>
 					</h:panelGroup>
 					<h:panelGroup layout="block">
-						<h:commandButton class="search-button ocean"
-							value="#{lbl.generate_screenshot}"
-							actionListener="#{fileUploadBean.generate}">
+						<h:commandButton class="search-button ocean" value="#{lbl.generate_screenshot}" actionListener="#{fileUploadBean.generate}">
 							<p:ajax render=":#{component.parent.clientId}" />
 						</h:commandButton>
 					</h:panelGroup>
