@@ -1,0 +1,12 @@
+/* CSS Document */
+body{margin: 0px; font-family: Verdana; height: 100%}
+#page{min-height:100%}
+.header{display: block; margin: 0px; background-color: green; color: white; height: 5em;}
+h1{font-size: 24pt; font-family: Verdana; margin: 0px; padding-top: 10px; text-align: center;}
+.content{display: block; background-color: green;}
+#output{position: relativ; margin-left: 33%; margin-top: 30px;}
+#upload_area{float: left; display: block; background-color: DAEDD4; height: 400px; width: 33%; margin-left: 33%; margin-top:100px; border-radius: 10px;}
+#upload_area p{position: relative; color: green; text-align: center; margin-top: 20%; width: 80%; margin-left:10%}
+#upload_button{position: relativ; color: white;background-color: green; width: 50%; height: 20%; margin-top: 40%; margin-left: 25%; border-radius:10px;}
+#footer{display: block; background-color: green; color: white; height: 3em; margin-top: -3em}
+.button{background-color: green; color: white; margin-right: 20px;}
