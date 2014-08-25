@@ -30,6 +30,7 @@
 		margin-left: 25%;
 		display: inline-block;
 		width: 50%;
+		min-width: 10em;
 		text-align: center; 				
 	}
 	.top{
@@ -123,6 +124,7 @@
 		width: 33%;
 		min-width: 400px;
 		padding: 0px;
+		z-index: 2;
 	}	
 	.textbox {
 		text-align: right;
