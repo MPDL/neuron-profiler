@@ -92,7 +92,9 @@
 
 		<h:form id="uploadForm">
 			<p:panel id="uploadPanel" class="uploadPanel center">
+				<div id="textOutput">
 				<h:outputText value="#{lbl.select_file}" />
+				</div>
 				<p:fileUpload fileUploadListener="#{fileUploadBean.handleFileUpload}" update="@this :outputForm:output" mode="advanced" dragDropSupport="true" auto="true" fileLimit="1" allowTypes="/(\.|\/)(swc)$/" oncomplete="afterUpload();">
 				</p:fileUpload>
 			</p:panel>
