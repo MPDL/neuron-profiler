@@ -107,7 +107,7 @@
 		margin: 0 auto;
 	}
 	
-	.uploadPanel,.output {
+	.output {
 		width: 500px;
 		background: white;
 		border: none;
@@ -125,6 +125,7 @@
 		min-width: 400px;
 		padding: 0px;
 		z-index: 2;
+		border: none;
 	}	
 	.textbox {
 		text-align: right;
