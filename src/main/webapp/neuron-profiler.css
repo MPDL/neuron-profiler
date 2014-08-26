@@ -6,6 +6,7 @@
 	body{
 		margin: 0px;
 		height: 100%;
+		min-width: 750px;
 	}
 	.page{
 		margin: 0px;
@@ -30,6 +31,7 @@
 		margin-left: 25%;
 		display: inline-block;
 		width: 50%;
+		min-width: 10em;
 		text-align: center; 				
 	}
 	.top{
@@ -106,7 +108,7 @@
 		margin: 0 auto;
 	}
 	
-	.uploadPanel,.output {
+	.output {
 		width: 500px;
 		background: white;
 		border: none;
@@ -123,6 +125,8 @@
 		width: 33%;
 		min-width: 400px;
 		padding: 0px;
+		z-index: 2;
+		border: none;
 	}	
 	.textbox {
 		text-align: right;
