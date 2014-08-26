@@ -1,8 +1,7 @@
 package de.mpg.mpdl.services.neuronProfiler.util;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.Observable;
 import java.util.ResourceBundle;
@@ -12,13 +11,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
-import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
 
 @ManagedBean
 @SessionScoped
-public class InternationalizationHelper extends Observable {
+public class InternationalizationHelper extends Observable implements Serializable {
     private static Logger logger = Logger.getLogger(InternationalizationHelper.class);
 	
     private String userLocaleString = "en";
