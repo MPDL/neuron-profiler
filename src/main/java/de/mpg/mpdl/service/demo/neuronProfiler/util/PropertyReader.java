@@ -26,7 +26,7 @@
  * Gesellschaft zur Förderung der Wissenschaft e.V.
  * All rights reserved. Use is subject to license terms.
  */ 
-package de.mpg.mpdl.services.neuronProfiler.util;
+package de.mpg.mpdl.service.demo.neuronProfiler.util;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

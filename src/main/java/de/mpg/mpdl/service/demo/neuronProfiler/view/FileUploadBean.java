@@ -1,4 +1,4 @@
-package de.mpg.mpdl.services.neuronProfiler.view;
+package de.mpg.mpdl.service.demo.neuronProfiler.view;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,9 +37,9 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
-import de.mpg.mpdl.services.neuronProfiler.util.PropertyReader;
-import de.mpg.mpdl.services.neuronProfiler.vo.SWCItem;
-import de.mpg.mpdl.services.neuronProfiler.vo.SWCMetadata;
+import de.mpg.mpdl.service.demo.neuronProfiler.util.PropertyReader;
+import de.mpg.mpdl.service.demo.neuronProfiler.vo.SWCItem;
+import de.mpg.mpdl.service.demo.neuronProfiler.vo.SWCMetadata;
 
 @ManagedBean
 @SessionScoped

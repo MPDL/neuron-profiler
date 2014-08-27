@@ -1,4 +1,4 @@
-package de.mpg.mpdl.services.neuronProfiler.vo;
+package de.mpg.mpdl.service.demo.neuronProfiler.vo;
 
 public class SWCMetadata {
 	

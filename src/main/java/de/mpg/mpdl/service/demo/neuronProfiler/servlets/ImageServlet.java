@@ -1,4 +1,4 @@
-package de.mpg.mpdl.services.neuronProfiler.servlets;
+package de.mpg.mpdl.service.demo.neuronProfiler.servlets;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import de.mpg.mpdl.services.neuronProfiler.beans.SessionBean;
+import de.mpg.mpdl.service.demo.neuronProfiler.beans.SessionBean;
 
 @WebServlet("/screenshotImage/*")
 public class ImageServlet extends HttpServlet{

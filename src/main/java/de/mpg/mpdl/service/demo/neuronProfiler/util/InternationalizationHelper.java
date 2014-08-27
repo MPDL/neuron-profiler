@@ -1,4 +1,4 @@
-package de.mpg.mpdl.services.neuronProfiler.util;
+package de.mpg.mpdl.service.demo.neuronProfiler.util;
 
 import java.io.IOException;
 import java.io.Serializable;

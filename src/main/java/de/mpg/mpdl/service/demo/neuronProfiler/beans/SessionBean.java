@@ -1,4 +1,4 @@
-package de.mpg.mpdl.services.neuronProfiler.beans;
+package de.mpg.mpdl.service.demo.neuronProfiler.beans;
 
 import java.io.File;
 import java.io.Serializable;
