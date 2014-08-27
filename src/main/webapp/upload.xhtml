@@ -19,24 +19,24 @@
 				<div id="textOutput">
 				<h:outputText value="#{lbl.select_file}" />
 				</div>
-				<p:fileUpload fileUploadListener="#{fileUploadBean.handleFileUpload}" update="@this :outputForm:output" mode="advanced" dragDropSupport="true" auto="true" fileLimit="1" allowTypes="/(\.|\/)(swc)$/" oncomplete="afterUpload();">
+				<p:fileUpload fileUploadListener="#{fileUploadBean.handleFileUpload}" update="@this :outputForm:output" mode="advanced" dragDropSupport="true"  auto="true" fileLimit="1" allowTypes="/(\.|\/)(swc)$/" oncomplete="afterUpload();">
 				</p:fileUpload>
 			</p:panel>
 		</h:form>
 
 		<h:form id="outputForm">
 
-			<p:panel id="output" class="output center">
-				<ui:fragment rendered="#{fileUploadBean.show3DView}">
+			<p:panel id="output" class="output center" rendered="#{fileUploadBean.show3DView}">
+				<ui:fragment>
 					<h:panelGroup id="outputHTML" class="outputHTML" layout="block">
 						<h:outputText escape="false" value="#{fileUploadBean.outputHTML}"></h:outputText>
 					</h:panelGroup>
+			
 					<h:panelGroup layout="block">
 						<h:commandButton class="search-button ocean" value="#{lbl.generate_screenshot}" actionListener="#{fileUploadBean.generate}">
 							<p:ajax render=":#{component.parent.clientId}" />
 						</h:commandButton>
 					</h:panelGroup>
-					
 					
 					
 					<p:accordionPanel activeIndex = "null">

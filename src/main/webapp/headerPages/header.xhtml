@@ -4,15 +4,17 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:pretty="http://ocpsoft.com/prettyfaces">
+
 	<h:form>
 		<div>
 			<h:outputText class="title" value="#{lbl.title}" />
-			<h:selectOneMenu style="float:right" id="selLocale" value="#{internationalizationHelper.userLocaleString}" immediate="true" valueChangeListener="#{internationalizationHelper.changeLanguage}">				
+			
+			<h:selectOneMenu style="float:right" id="selLocale" value="#{internationalizationHelper.userLocaleString}" valueChangeListener="#{internationalizationHelper.changeLanguage}">				
 				<f:selectItem itemValue="de" itemLabel="#{lbl.ENUM_LANGUAGE_DE}" />
-				<f:selectItem itemValue="en" itemLabel="#{lbl.ENUM_LANGUAGE_EN}" />			
-				<f:ajax event="change" execute="@all" render="@all"/>
-			</h:selectOneMenu>
+				<f:selectItem itemValue="en" itemLabel="#{lbl.ENUM_LANGUAGE_EN}" />
+				<f:ajax event="change" execute="@form" render="@none"/>
+			</h:selectOneMenu>	
 		</div>
 	</h:form>
-	
+
 </ui:composition>

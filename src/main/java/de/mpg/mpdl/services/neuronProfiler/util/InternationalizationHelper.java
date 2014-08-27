@@ -1,5 +1,6 @@
 package de.mpg.mpdl.services.neuronProfiler.util;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Locale;
@@ -49,7 +50,7 @@ public class InternationalizationHelper extends Observable implements Serializab
 
     }
     
-    public void changeLanguage(ValueChangeEvent event)
+    public void changeLanguage(ValueChangeEvent event) throws IOException
     {
     	FacesContext fc = FacesContext.getCurrentInstance();
     	if (event.getOldValue() != null && !event.getOldValue().equals(event.getNewValue()))
@@ -78,6 +79,7 @@ public class InternationalizationHelper extends Observable implements Serializab
 				logger.warn("Could not notify bean about language change", e);
 			}
     	}
+    	fc.getExternalContext().redirect("/neuron-profiler");
     }
 
 	public String getUserLocaleString() {

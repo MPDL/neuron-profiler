@@ -91,6 +91,7 @@ public class FileUploadBean implements Serializable {
 		try {
 			this.item.setSwcRespHTMLFile(generate3DView(uf));
 			setShow3DView(true);
+			outputHTML = FileUtils.readFileToString(this.item.getSwcRespHTMLFile());
 		} catch (HttpException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -102,13 +103,11 @@ public class FileUploadBean implements Serializable {
 	}
 
 	public String getOutputHTML() {
-		try {
-
-			outputHTML = FileUtils.readFileToString(this.item
-					.getSwcRespHTMLFile());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			//return FileUtils.readFileToString(this.item.getSwcRespHTMLFile());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		return outputHTML;
 	}
 
