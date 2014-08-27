@@ -10,6 +10,7 @@
 *.war
 *.ear
 *.settings
+target/
 bin/
 
 
@@ -20,4 +21,3 @@ hs_err_pid*
 src/main/java/rebel.xml
 src/main/resources/rebel.xml
 
-/target
