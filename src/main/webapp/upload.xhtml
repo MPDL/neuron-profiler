@@ -39,9 +39,9 @@
 					</h:panelGroup>
 					
 					
-					<p:accordionPanel activeIndex = "null">
+					<p:accordionPanel id = "outputMetaData" activeIndex = "null">
 						<p:ajax  event = "tabChange" listener = "#{fileUploadBean.generateMD}" update="md"></p:ajax>
-						 <p:tab title="MetaData">
+						 <p:tab  title="MetaData">
 						 	<h:panelGrid>
 								<p:dataTable id="md" var="md" value="#{fileUploadBean.item.mds}" emptyMessage = "#{msg.analyze_metadata}">
 									<p:column headerText="Key">
