@@ -73,11 +73,13 @@ public class PropertyReader
     }
 
     private static InputStream getInputStream(String filePath)
-    {
+    {   
         InputStream instream = null;
-        try
+        try  
         {
-        	instream = new FileInputStream(filePath);
+        	String jbossHome = System.getProperty("catalina.base");
+        	String path = jbossHome + "/conf/"  + filePath;
+        	instream = new FileInputStream(path);
         }
         catch (Exception e)
         {
