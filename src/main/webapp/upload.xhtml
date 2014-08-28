@@ -11,11 +11,8 @@
 <ui:composition template="template/template.xhtml">
 
 	<ui:define name="center">
-
-
-		
 		<h:form id="uploadForm">
-			<p:panel id="uploadPanel" class="uploadPanel center">
+			<p:panel id="uploadPanel" styleClass="#{!fileUploadBean.show3DView ? 'uploadPanelInit' : 'uploadPanel'} center" >
 				<div id="textOutput">
 				<h:outputText value="#{lbl.select_file}" />
 				</div>
@@ -25,7 +22,6 @@
 		</h:form>
 
 		<h:form id="outputForm">
-
 			<p:panel id="output" class="output center" rendered="#{fileUploadBean.show3DView}">
 				<ui:fragment>
 					<h:panelGroup id="outputHTML" class="outputHTML" layout="block">
@@ -36,8 +32,7 @@
 						<h:commandButton class="search-button ocean" value="#{lbl.generate_screenshot}" actionListener="#{fileUploadBean.generate}">
 							<p:ajax render=":#{component.parent.clientId}" />
 						</h:commandButton>
-					</h:panelGroup>
-					
+					</h:panelGroup>				
 					
 					<p:accordionPanel id = "outputMetaData" activeIndex = "null">
 						<p:ajax  event = "tabChange" listener = "#{fileUploadBean.generateMD}" update="md"></p:ajax>
@@ -56,8 +51,6 @@
 					</p:accordionPanel>
 				</ui:fragment>
 			</p:panel>
-
-		
 		</h:form>
 	</ui:define>
 </ui:composition>

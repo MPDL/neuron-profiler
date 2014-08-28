@@ -1,184 +1,195 @@
-@CHARSET "ISO-8859-1";
-
-	*{
-		margin: 0px;
-	}
-	body{
-		margin: 0px;
-		height: 100%;
-		min-width: 750px;
-	}
-	.page{
-		margin: 0px;
-		min-height:100%;
-	}
-	.header{
-		position: fixed;
-		top: 0px;
-		width: 100%;
-		z-index: 2147483647;
-		display: block;
-		height: 5.1em;
-		margin: 0px;
-		color: white;
-		background-color: green;
-	}
-	.title {
-		font-family: Georgia, serif;
-		color: white;
-		font-size: 3em;
-		padding: 10px;
-		margin-left: 25%;
-		display: inline-block;
-		width: 50%;
-		min-width: 10em;
-		text-align: center; 				
-	}
-	.top{
-		background: green;
-		float:left;
-	}
-	a{
-		margin-left: 2em;
-		color: white;
-		text-decoration: none;
-	}
-	a:hover{
-		color: orange;
-		text-decoration: underline;
-	}
+*{
+	margin: 0px;
+}
+body{
+	margin: 0px;
+	height: 100%;
+	min-width: 750px;
+}
+.page{
+	margin: 0px;
+	min-height:100%;
+}
+.header{
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	z-index: 2147483647;
+	display: block;
+	height: 5.1em;
+	margin: 0px;
+	color: white;
+	background-color: green;
+}
+.title {
+	font-family: Georgia, serif;
+	color: white;
+	font-size: 3em;
+	padding: 10px;
+	margin-left: 25%;
+	display: inline-block;
+	width: 50%;
+	min-width: 10em;
+	text-align: center; 				
+}
+.top{
+	background: green;
+	float:left;
+}
+a{
+	margin-left: 2em;
+	color: white;
+	text-decoration: none;
+}
+a:hover{
+	color: orange;
+	text-decoration: underline;
+}
 
 
-	.ui-layout-unit-content{
-		background-color: green !important;
-	}
+.ui-layout-unit-content{
+	background-color: green !important;
+}
 
-	.ui-fileupload-buttonbar .ui-button{
-		background: green;
-		color: white;
-		width: 50%;
-		height: 3em;
-		margin-left: 25%;
-		margin-top: 25%;
+.ui-fileupload-buttonbar .ui-button{
+	background: green;
+	color: white;
+	width: 50%;
+	height: 3em;
+	margin-left: 25%;
+	margin-top: 25%;
 
-	}
-	.ui-button-text-icon-left .ui-button-text {
-		padding: 0.3em 1em;
-	}
-	.ui-fileupload-content {
-		display: none;
-	}
-	.ui-panel .ui-panel-content{
-		padding: 0px;
-		font-size: 1em; /* connected to margin of inner element */
+}
+.ui-button-text-icon-left .ui-button-text {
+	padding: 0.3em 1em;
+}
+.ui-fileupload-content {
+	display: none;
+}
+.ui-panel .ui-panel-content{
+	padding: 0px;
+	font-size: 1em; /* connected to margin of inner element */
 
-	}
-	.ui-panel .ui-panel-content canvas{
-		margin-top: 5em;
-	}
-	.ui-widget-header {
-		background: rgb(218,237,212);
-		border-color: rgb(218,237,212);
-		width: 100%;
-		margin-top: -2.6em;
+}
+.ui-panel .ui-panel-content canvas{
+	margin-top: 5em;
+}
+.ui-widget-header {
+	background: rgb(218,237,212);
+	border-color: rgb(218,237,212);
+	width: 100%;
+	margin-top: -2.6em;
 
-		padding-left: 0px;
-		border-radius: 6px;
-		height: 110%;
-	}
+	padding-left: 0px;
+	border-radius: 6px;
+	height: 110%;
+}
 
-	.ui-icon {
-		display: none;
-	}
-	.ui-accordion {
-		width: 750px;
-		position: relative;
-		left: -25%;
-	}
-	.footer{
-		position: fixed;
-		bottom: 0px;
-		width: 100%;
-		background-color: green;
-		color: white;
-		height: 2em;
+.ui-icon {
+	display: none;
+}
+.ui-accordion {
+	width: 750px;
+	position: relative;
+	left: -25%;
+}
+.footer{
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	background-color: green;
+	color: white;
+	height: 2em;
 
-	}
-	.center {
-		margin: 0 auto;
-	}
-	
-	.output {
-		width: 500px;
-		background: white;
-		border: none;
-	}
+}
+.center {
+	margin: 0 auto;
+}
 
-	
-	.uploadPanel {
-		float: left;
-		margin: 0 33%;
-		height: 25%;
-		min-height: 12em;
-		background-color: DAEDD4;
-		margin-top: 300px;
-		width: 33%;
-		min-width: 400px;
-		padding: 0px;
-		z-index: 2;
-		border: none;
-	}	
-	.textbox {
-		text-align: right;
-		background: white;
-		-webkit-border-radius: 5px;
-		-moz-border-radius: 5px;
-		border-radius: 5px;
-		border: 1px solid #51BEDB;
-		border-radius: 5px;
-		box-shadow: 0 0 5px 3px #51BEDB;
-		color: #666;
-		outline: none;
-		height: 1.5em;
-		width: 5em;
-	}
-	
-	input.search-button {
-		width: 170px;
-		height: 35px;
-		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-		font-size: 14px;
-		text-align: center;
-		line-height: 34px;
-		text-decoration: none;
-		-webkit-border-radius: 10px;
-		-moz-border-radius: 50px;
-		-o-border-radius: 50px;
-		-khtml-border-radius: 50px;
-		border-radius: 10px;
-		font-weight: bold;
-		border: none;
-		cursor: pointer;
-	}
-	
-	input.ocean {
-		background: green;
-		color: white;
-		position: relative;
-		left: -25%;
-	}
-	.ui-accordion .ui-accordion-header {
-		background: #DAEDD4;
-		border: #DAEDD4;
-		color: #2779AA;
-	} 
-	.ui-messages-error {
-		backgound-color: yellow;
-	}
-	.ui-state-default table th{
-		background: #DAEDD4;
-		color: #2779AA
-	}
-	#textOutput{
-		text-align: center;
-	}
+.output {
+	width: 500px;
+	background: white;
+	border: none;
+}
+
+
+.uploadPanelInit{
+	float: left;
+	margin: 0 33%;
+	height: 25%;
+	min-height: 12em;
+	background-color: DAEDD4;
+	margin-top: 300px;
+	width: 33%;
+	min-width: 400px;
+	padding: 0px;
+	z-index: 2;
+	border: none;
+}
+
+.uploadPanel {
+	position: fixed;
+	margin-top: 8.5em;
+	margin-left: 0.5%; 
+	height: 150px;
+	width: 15%;
+	min-width: 200px;
+	float:left;
+	font-size: 0.7em;
+}
+
+
+.textbox {
+	text-align: right;
+	background: white;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #51BEDB;
+	border-radius: 5px;
+	box-shadow: 0 0 5px 3px #51BEDB;
+	color: #666666;
+	outline: none;
+	height: 1.5em;
+	width: 5em;
+}
+
+input.search-button {
+	width: 170px;
+	height: 35px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	text-align: center;
+	line-height: 34px;
+	text-decoration: none;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 50px;
+	-o-border-radius: 50px;
+	-khtml-border-radius: 50px;
+	border-radius: 10px;
+	font-weight: bold;
+	border: none;
+	cursor: pointer;
+}
+
+input.ocean {
+	background: green;
+	color: white;
+	position: relative;
+	left: -25%;
+}
+.ui-accordion .ui-accordion-header {
+	background: #DAEDD4;
+	border: #DAEDD4;
+	color: #2779AA;
+} 
+.ui-messages-error {
+	backgound-color: yellow;
+}
+.ui-state-default table th{
+	background: #DAEDD4;
+	color: #2779AA
+}
+#textOutput{
+	text-align: center;
+}
