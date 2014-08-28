@@ -44,7 +44,9 @@ import de.mpg.mpdl.service.demo.neuronProfiler.vo.SWCMetadata;
 @ManagedBean
 @SessionScoped
 public class FileUploadBean implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 7677383714766328388L;
+
 	private static Logger logger = Logger.getLogger(FileUploadBean.class);
 
 	private SWCItem item = new SWCItem();

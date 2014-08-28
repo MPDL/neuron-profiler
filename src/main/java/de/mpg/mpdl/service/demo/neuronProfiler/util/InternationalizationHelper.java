@@ -18,7 +18,10 @@ import org.apache.log4j.Logger;
 @ManagedBean
 @SessionScoped
 public class InternationalizationHelper extends Observable implements Serializable {
-    private static Logger logger = Logger.getLogger(InternationalizationHelper.class);
+
+	private static final long serialVersionUID = 7651292472371747930L;
+
+	private static Logger logger = Logger.getLogger(InternationalizationHelper.class);
 	
     private String userLocaleString = "en";
     private Locale userLocale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();

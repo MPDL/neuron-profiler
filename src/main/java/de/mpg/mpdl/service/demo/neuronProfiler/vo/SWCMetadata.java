@@ -1,7 +1,11 @@
 package de.mpg.mpdl.service.demo.neuronProfiler.vo;
 
-public class SWCMetadata {
+import java.io.Serializable;
+
+public class SWCMetadata implements Serializable {
 	
+	private static final long serialVersionUID = -3923073369251828087L;
+
 	private String key;
 	private String value;
 	

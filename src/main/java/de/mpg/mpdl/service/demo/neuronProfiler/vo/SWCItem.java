@@ -1,10 +1,13 @@
 package de.mpg.mpdl.service.demo.neuronProfiler.vo;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SWCItem {
+public class SWCItem implements Serializable {
+
+	private static final long serialVersionUID = -3859411517798752904L;
 
 	private File swcFile;
 	private File swcRespHTMLFile;

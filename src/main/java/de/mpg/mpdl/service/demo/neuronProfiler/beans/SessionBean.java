@@ -11,7 +11,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class SessionBean implements Serializable{
 
-	private static final long serialVersionUID = 1;
+	private static final long serialVersionUID = 1620446193528678213L;
 
 	private boolean readed = true;
 
